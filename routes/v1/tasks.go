@@ -2,10 +2,12 @@ package routes
 
 import (
 	"fmt"
-	"github.com/SarjitDelivala/task-managment-go-fiber/task"
+	"strconv"
+
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"
-	"strconv"
+
+	"github.com/SarjitDelivala/task-managment-go-fiber/task"
 )
 
 func LoadTaskRoutes(r fiber.Router, db *gorm.DB) {
@@ -33,7 +35,7 @@ func LoadTaskRoutes(r fiber.Router, db *gorm.DB) {
 		}
 		t, err := task.CreateTask(db, t)
 		if err != nil {
-			return nil
+			return err
 		}
 		return c.JSON(t)
 	})
